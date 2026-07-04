@@ -47,6 +47,9 @@ $removePatterns = @(
 )
 
 Get-Process $appName -ErrorAction SilentlyContinue | Stop-Process -Force
+if (Test-Path $releaseRoot) {
+    Remove-Item -LiteralPath $releaseRoot -Recurse -Force
+}
 New-Item -ItemType Directory -Path $releaseRoot -Force | Out-Null
 
 foreach ($ridInfo in $rids) {
