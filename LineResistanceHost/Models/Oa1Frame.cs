@@ -7,10 +7,10 @@ public sealed class Oa1Frame
 {
     private static readonly byte[] Header = [0xDF, 0x02, 0x07, 0x01];
     private static readonly string[] PinOrder = ["DP", "DM", "C1", "C2", "S1", "S2"];
-    private const int PowerZK2DPlusOffset = 30;
-    private const int PowerZK2DMinusOffset = 34;
-    private const int PowerZK2CurrentOffset = 50;
-    private static readonly (double TotalMilliOhms, double Alpha)[] PowerZK2Calibration =
+    private const int WitrnK2DPlusOffset = 30;
+    private const int WitrnK2DMinusOffset = 34;
+    private const int WitrnK2CurrentOffset = 50;
+    private static readonly (double TotalMilliOhms, double Alpha)[] WitrnK2Calibration =
     [
         (23.13, 0.558),
         (65.75, 0.532),
@@ -69,8 +69,8 @@ public sealed class Oa1Frame
 
     public static bool TryParse(Oa1DeviceKind kind, ReadOnlySpan<byte> report, out Oa1Frame? frame)
     {
-        return kind == Oa1DeviceKind.PowerZK2
-            ? TryParsePowerZK2(report, out frame)
+        return kind == Oa1DeviceKind.WitrnK2
+            ? TryParseWitrnK2(report, out frame)
             : TryParseOa1(report, out frame);
     }
 
@@ -135,19 +135,19 @@ public sealed class Oa1Frame
         return true;
     }
 
-    public static bool TryParsePowerZK2(ReadOnlySpan<byte> report, out Oa1Frame? frame)
+    public static bool TryParseWitrnK2(ReadOnlySpan<byte> report, out Oa1Frame? frame)
     {
         frame = null;
 
-        var payload = LocatePowerZK2Payload(report);
+        var payload = LocateWitrnK2Payload(report);
         if (payload.Length < 57)
         {
             return false;
         }
 
-        var dPlus = ReadSingleLittleEndian(payload.Slice(PowerZK2DPlusOffset, 4));
-        var dMinus = ReadSingleLittleEndian(payload.Slice(PowerZK2DMinusOffset, 4));
-        var currentAmps = ReadSingleLittleEndian(payload.Slice(PowerZK2CurrentOffset, 4));
+        var dPlus = ReadSingleLittleEndian(payload.Slice(WitrnK2DPlusOffset, 4));
+        var dMinus = ReadSingleLittleEndian(payload.Slice(WitrnK2DMinusOffset, 4));
+        var currentAmps = ReadSingleLittleEndian(payload.Slice(WitrnK2CurrentOffset, 4));
         if (!float.IsFinite(dPlus) || !float.IsFinite(dMinus) || !float.IsFinite(currentAmps) || currentAmps <= 0)
         {
             return false;
@@ -159,14 +159,14 @@ public sealed class Oa1Frame
             return false;
         }
 
-        var (alpha, extrapolated) = EstimatePowerZK2GbusAlpha(totalMilliOhms);
+        var (alpha, extrapolated) = EstimateWitrnK2GbusAlpha(totalMilliOhms);
         var gbusMilliOhms = Math.Round(totalMilliOhms * alpha, 1, MidpointRounding.AwayFromZero);
         var vbusMilliOhms = Math.Round(totalMilliOhms - gbusMilliOhms, 1, MidpointRounding.AwayFromZero);
         var estimatedV0 = dMinus + currentAmps * gbusMilliOhms / 1000d;
 
         frame = new Oa1Frame
         {
-            SourceKind = Oa1DeviceKind.PowerZK2,
+            SourceKind = Oa1DeviceKind.WitrnK2,
             Cable = "N/A",
             Pins = new ReadOnlyDictionary<string, bool>(PinOrder.ToDictionary(pin => pin, _ => false)),
             PinsApplicable = false,
@@ -212,7 +212,7 @@ public sealed class Oa1Frame
         return [];
     }
 
-    private static ReadOnlySpan<byte> LocatePowerZK2Payload(ReadOnlySpan<byte> report)
+    private static ReadOnlySpan<byte> LocateWitrnK2Payload(ReadOnlySpan<byte> report)
     {
         if (report.Length > 0 && report[0] == 0xFF)
         {
@@ -237,17 +237,17 @@ public sealed class Oa1Frame
         return BitConverter.Int32BitsToSingle(BinaryPrimitives.ReadInt32LittleEndian(value));
     }
 
-    private static (double Alpha, bool Extrapolated) EstimatePowerZK2GbusAlpha(double totalMilliOhms)
+    private static (double Alpha, bool Extrapolated) EstimateWitrnK2GbusAlpha(double totalMilliOhms)
     {
-        if (totalMilliOhms <= PowerZK2Calibration[0].TotalMilliOhms)
+        if (totalMilliOhms <= WitrnK2Calibration[0].TotalMilliOhms)
         {
-                return (ClampAlpha(InterpolateAlpha(totalMilliOhms, PowerZK2Calibration[0], PowerZK2Calibration[1])), true);
+                return (ClampAlpha(InterpolateAlpha(totalMilliOhms, WitrnK2Calibration[0], WitrnK2Calibration[1])), true);
         }
 
-        for (var index = 1; index < PowerZK2Calibration.Length; index++)
+        for (var index = 1; index < WitrnK2Calibration.Length; index++)
         {
-            var previous = PowerZK2Calibration[index - 1];
-            var current = PowerZK2Calibration[index];
+            var previous = WitrnK2Calibration[index - 1];
+            var current = WitrnK2Calibration[index];
             if (totalMilliOhms <= current.TotalMilliOhms)
             {
                 return (ClampAlpha(InterpolateAlpha(totalMilliOhms, previous, current)), false);
@@ -256,8 +256,8 @@ public sealed class Oa1Frame
 
         return (ClampAlpha(InterpolateAlpha(
             totalMilliOhms,
-            PowerZK2Calibration[^2],
-            PowerZK2Calibration[^1])), true);
+            WitrnK2Calibration[^2],
+            WitrnK2Calibration[^1])), true);
     }
 
     private static double InterpolateAlpha(
@@ -274,3 +274,4 @@ public sealed class Oa1Frame
         return Math.Clamp(alpha, 0, 1);
     }
 }
+

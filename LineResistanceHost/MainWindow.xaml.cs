@@ -46,7 +46,7 @@ public sealed partial class MainWindow : Window
         var title = kind switch
         {
             Oa1DeviceKind.Oa1 => AppText.Get("AppTitleOa1Connected"),
-            Oa1DeviceKind.PowerZK2 => AppText.Get("AppTitleK2Connected"),
+            Oa1DeviceKind.WitrnK2 => AppText.Get("AppTitleK2Connected"),
             _ => AppText.Get("AppTitleDisconnected")
         };
 
@@ -77,3 +77,4 @@ public sealed partial class MainWindow : Window
         AppWindow.Resize(new SizeInt32((int)(widthDip * scale), (int)(heightDip * scale)));
     }
 }
+

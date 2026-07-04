@@ -9,8 +9,8 @@ namespace LineResistanceHost.Services;
 public sealed class Oa1HidService : IDisposable
 {
     public const ushort TargetVendorId = 14007;
-    public const ushort PowerZK2VendorId = 0x0716;
-    public const ushort PowerZK2ProductId = 0x5060;
+    public const ushort WitrnK2VendorId = 0x0716;
+    public const ushort WitrnK2ProductId = 0x5060;
 
     private const uint DigcfPresent = 0x00000002;
     private const uint DigcfDeviceInterface = 0x00000010;
@@ -32,7 +32,7 @@ public sealed class Oa1HidService : IDisposable
     private ushort _inputReportLength = 64;
     private ushort _outputReportLength = 65;
     private int _loggedFrameCount;
-    private DateTimeOffset _lastPowerZK2Frame = DateTimeOffset.MinValue;
+    private DateTimeOffset _lastWitrnK2Frame = DateTimeOffset.MinValue;
 
     public event EventHandler<Oa1Frame>? FrameReceived;
     public event EventHandler<string>? LogReceived;
@@ -131,7 +131,7 @@ public sealed class Oa1HidService : IDisposable
             _connectedKind = device.Kind;
             _readCancellation = readCancellation;
             _loggedFrameCount = 0;
-            _lastPowerZK2Frame = DateTimeOffset.MinValue;
+            _lastWitrnK2Frame = DateTimeOffset.MinValue;
         }
 
         ReadCapabilities(handle);
@@ -220,7 +220,7 @@ public sealed class Oa1HidService : IDisposable
             var kind = GetCurrentKind(handle);
             if (Oa1Frame.TryParse(kind, buffer.AsSpan(0, (int)read), out var frame) && frame is not null)
             {
-                if (kind == Oa1DeviceKind.PowerZK2 && !ShouldPublishPowerZK2Frame())
+                if (kind == Oa1DeviceKind.WitrnK2 && !ShouldPublishWitrnK2Frame())
                 {
                     continue;
                 }
@@ -520,17 +520,17 @@ public sealed class Oa1HidService : IDisposable
         return true;
     }
 
-    private bool ShouldPublishPowerZK2Frame()
+    private bool ShouldPublishWitrnK2Frame()
     {
         var now = DateTimeOffset.Now;
         lock (_sync)
         {
-            if (now - _lastPowerZK2Frame < TimeSpan.FromMilliseconds(500))
+            if (now - _lastWitrnK2Frame < TimeSpan.FromMilliseconds(500))
             {
                 return false;
             }
 
-            _lastPowerZK2Frame = now;
+            _lastWitrnK2Frame = now;
             return true;
         }
     }
@@ -615,9 +615,9 @@ public sealed class Oa1HidService : IDisposable
             return true;
         }
 
-        if (vendorId == PowerZK2VendorId && productId == PowerZK2ProductId)
+        if (vendorId == WitrnK2VendorId && productId == WitrnK2ProductId)
         {
-            kind = Oa1DeviceKind.PowerZK2;
+            kind = Oa1DeviceKind.WitrnK2;
             return true;
         }
 
@@ -712,3 +712,4 @@ public sealed class Oa1HidService : IDisposable
         public ushort NumberFeatureDataIndices;
     }
 }
+

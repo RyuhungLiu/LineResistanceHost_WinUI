@@ -415,7 +415,7 @@ public sealed partial class MainPage : Page
             return "-";
         }
 
-        if (frame.SourceKind != Oa1DeviceKind.PowerZK2 || !frame.SplitValuesEstimated)
+        if (frame.SourceKind != Oa1DeviceKind.WitrnK2 || !frame.SplitValuesEstimated)
         {
             return frame.RawHex;
         }
@@ -559,3 +559,4 @@ public sealed partial class MainPage : Page
         return Path.Combine(logDirectory, $"line-resistance-host-{DateTime.Now:yyyyMMdd-HHmmss}.log");
     }
 }
+

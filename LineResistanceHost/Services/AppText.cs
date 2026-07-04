@@ -25,7 +25,7 @@ public static class AppText
             {
                 ["AppTitleDisconnected"] = "未连接",
                 ["AppTitleOa1Connected"] = "ATK-OA1已连接",
-                ["AppTitleK2Connected"] = "K2已连接",
+                ["AppTitleK2Connected"] = "WITRN K2已连接",
                 ["WindowTitle"] = "Line Resistance Host",
                 ["BusResistance"] = "总线阻",
                 ["CableLength"] = "线材长度",
@@ -71,7 +71,7 @@ public static class AppText
                 ["AutoAttempt"] = "自动抢占发现 {0}，准备连接。",
                 ["NoDeviceTitle"] = "未发现设备",
                 ["DevicesRefreshedTitle"] = "已刷新设备",
-                ["InsertDeviceMessage"] = "请插入 ATK-OA1 或 POWER-Z K2。",
+                ["InsertDeviceMessage"] = "请插入 ATK-OA1 或 WITRN K2。",
                 ["DeviceCountMessage"] = "发现 {0} 个目标设备。",
                 ["ReadInterruptedMessage"] = "设备读取中断或已拔出。",
                 ["DeviceConnectedTitle"] = "设备已连接",
@@ -80,7 +80,7 @@ public static class AppText
                 ["OpenHidFailed"] = "无法打开 HID 设备",
                 ["ConnectedLog"] = "已连接 {0} {1}",
                 ["ConnectPreActivation"] = "连接预激活",
-                ["K2NoActivation"] = "POWER-Z K2 无需激活，开始读取 Metrics Report。",
+                ["K2NoActivation"] = "WITRN K2 无需激活，开始读取 Metrics Report。",
                 ["DeviceNotConnected"] = "设备未连接",
                 ["ActivationNotRequired"] = "当前设备无需激活",
                 ["ReadInterruptedLog"] = "读取中断：{0}",
@@ -107,7 +107,7 @@ public static class AppText
             {
                 ["AppTitleDisconnected"] = "未連接",
                 ["AppTitleOa1Connected"] = "ATK-OA1已連接",
-                ["AppTitleK2Connected"] = "K2已連接",
+                ["AppTitleK2Connected"] = "WITRN K2已連接",
                 ["WindowTitle"] = "Line Resistance Host",
                 ["BusResistance"] = "總線阻",
                 ["CableLength"] = "線材長度",
@@ -153,7 +153,7 @@ public static class AppText
                 ["AutoAttempt"] = "自動搶占發現 {0}，準備連接。",
                 ["NoDeviceTitle"] = "未發現設備",
                 ["DevicesRefreshedTitle"] = "已重新整理設備",
-                ["InsertDeviceMessage"] = "請插入 ATK-OA1 或 POWER-Z K2。",
+                ["InsertDeviceMessage"] = "請插入 ATK-OA1 或 WITRN K2。",
                 ["DeviceCountMessage"] = "發現 {0} 個目標設備。",
                 ["ReadInterruptedMessage"] = "設備讀取中斷或已拔出。",
                 ["DeviceConnectedTitle"] = "設備已連接",
@@ -162,7 +162,7 @@ public static class AppText
                 ["OpenHidFailed"] = "無法打開 HID 設備",
                 ["ConnectedLog"] = "已連接 {0} {1}",
                 ["ConnectPreActivation"] = "連接預激活",
-                ["K2NoActivation"] = "POWER-Z K2 無需激活，開始讀取 Metrics Report。",
+                ["K2NoActivation"] = "WITRN K2 無需激活，開始讀取 Metrics Report。",
                 ["DeviceNotConnected"] = "設備未連接",
                 ["ActivationNotRequired"] = "目前設備無需激活",
                 ["ReadInterruptedLog"] = "讀取中斷：{0}",
@@ -189,7 +189,7 @@ public static class AppText
             {
                 ["AppTitleDisconnected"] = "Disconnected",
                 ["AppTitleOa1Connected"] = "ATK-OA1 Connected",
-                ["AppTitleK2Connected"] = "K2 Connected",
+                ["AppTitleK2Connected"] = "WITRN K2 Connected",
                 ["WindowTitle"] = "ATK-OA1 Cable Tester",
                 ["BusResistance"] = "Bus R",
                 ["CableLength"] = "Cable length",
@@ -235,7 +235,7 @@ public static class AppText
                 ["AutoAttempt"] = "Auto-preempt found {0}; connecting.",
                 ["NoDeviceTitle"] = "No device found",
                 ["DevicesRefreshedTitle"] = "Devices refreshed",
-                ["InsertDeviceMessage"] = "Insert an ATK-OA1 or POWER-Z K2.",
+                ["InsertDeviceMessage"] = "Insert an ATK-OA1 or WITRN K2.",
                 ["DeviceCountMessage"] = "Found {0} target device(s).",
                 ["ReadInterruptedMessage"] = "Device read was interrupted or the device was removed.",
                 ["DeviceConnectedTitle"] = "Device connected",
@@ -244,7 +244,7 @@ public static class AppText
                 ["OpenHidFailed"] = "Unable to open HID device",
                 ["ConnectedLog"] = "Connected {0} {1}",
                 ["ConnectPreActivation"] = "Connect pre-activation",
-                ["K2NoActivation"] = "POWER-Z K2 does not require activation. Reading Metrics Report.",
+                ["K2NoActivation"] = "WITRN K2 does not require activation. Reading Metrics Report.",
                 ["DeviceNotConnected"] = "Device is not connected",
                 ["ActivationNotRequired"] = "The current device does not require activation",
                 ["ReadInterruptedLog"] = "Read interrupted: {0}",
@@ -357,3 +357,4 @@ public static class AppText
         }
     }
 }
+
