@@ -55,6 +55,11 @@ New-Item -ItemType Directory -Path $releaseRoot -Force | Out-Null
 foreach ($ridInfo in $rids) {
     $rid = $ridInfo.Rid
     $platform = $ridInfo.Platform
+    $output = Join-Path $root "LineResistanceHost\bin\$platform\Release\net10.0-windows10.0.26100.0\$rid"
+
+    if (Test-Path $output) {
+        Remove-Item -LiteralPath $output -Recurse -Force
+    }
 
     Write-Host "=== Building $rid slim framework-dependent ==="
     dotnet build $project -c Release -r $rid `
@@ -69,7 +74,6 @@ foreach ($ridInfo in $rids) {
         throw "Build failed for $rid slim"
     }
 
-    $output = Join-Path $root "LineResistanceHost\bin\$platform\Release\net10.0-windows10.0.26100.0\$rid"
     if (-not (Test-Path (Join-Path $output "$appName.exe"))) {
         throw "Cannot find build output exe for $rid slim"
     }
