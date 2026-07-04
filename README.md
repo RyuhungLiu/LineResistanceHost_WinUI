@@ -10,6 +10,20 @@ The app currently supports:
 - Light and dark Fluent-style UI.
 - Simplified Chinese, Traditional Chinese, and English UI text.
 
+## Screenshots
+
+### ATK-OA1 Light Mode
+
+ATK-OA1 connected in light mode, showing total bus resistance, separated VBUS/GBUS values, cable type, and pin continuity.
+
+![ATK-OA1 light mode screenshot](docs/images/line-resistance-host-oa1-light.png)
+
+### WITRN K2 Dark Mode
+
+WITRN K2 connected in dark mode. K2 reports total bus resistance directly from HID metrics; the separated `?VBUS` and `?GBUS` values are empirical estimates and are marked with a leading question mark in the UI.
+
+![WITRN K2 dark mode screenshot](docs/images/line-resistance-host-witrn-k2-dark.png)
+
 ## K2 Calculation Note
 
 For WITRN K2, the HID metrics report exposes current `I(A)`, `D+(V)`, and `D-(V)`.
