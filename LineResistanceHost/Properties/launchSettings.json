@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "LineResistanceHost_WinUI (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "LineResistanceHost_WinUI (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

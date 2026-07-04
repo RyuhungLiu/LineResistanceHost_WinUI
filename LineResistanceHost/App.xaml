@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Application
+    x:Class="LineResistanceHost.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:LineResistanceHost">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <FontIconSource x:Key="DeviceIconSource" Glyph="&#xE772;" />
+            <FontIconSource x:Key="PulseIconSource" Glyph="&#xE95E;" />
+
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Light">
+                    <Color x:Key="WorkbenchAccentColor">#FF0A74D8</Color>
+                    <Color x:Key="ShellGradientStartColor">#74F8FBFF</Color>
+                    <Color x:Key="ShellGradientEndColor">#52D7E8F8</Color>
+                    <Color x:Key="HeroGradientStartColor">#FF496B8B</Color>
+                    <Color x:Key="HeroGradientEndColor">#FF072E64</Color>
+                    <Color x:Key="ResistanceGoodColor">#FF0A8E78</Color>
+                    <Color x:Key="ResistanceBadColor">#FFC04438</Color>
+                    <SolidColorBrush x:Key="WorkbenchBackgroundBrush" Color="#00FFFFFF" />
+                    <SolidColorBrush x:Key="GlassPanelBrush" Color="#9AFFFFFF" />
+                    <SolidColorBrush x:Key="GlassPanelStrongBrush" Color="#BEFFFFFF" />
+                    <SolidColorBrush x:Key="GlassPanelSubtleBrush" Color="#55FFFFFF" />
+                    <SolidColorBrush x:Key="GlassPanelStrokeBrush" Color="#360A1A2A" />
+                    <SolidColorBrush x:Key="SubtlePanelStrokeBrush" Color="#160A1A2A" />
+                    <SolidColorBrush x:Key="PinConnectedBrush" Color="#FF0B987C" />
+                    <SolidColorBrush x:Key="PinDisconnectedBrush" Color="#FF50535D" />
+                    <SolidColorBrush x:Key="OnGlassPrimaryTextBrush" Color="#FFFFFFFF" />
+                    <SolidColorBrush x:Key="OnGlassSecondaryTextBrush" Color="#D9FFFFFF" />
+                </ResourceDictionary>
+
+                <ResourceDictionary x:Key="Dark">
+                    <Color x:Key="WorkbenchAccentColor">#FF71B8FF</Color>
+                    <Color x:Key="ShellGradientStartColor">#BC152133</Color>
+                    <Color x:Key="ShellGradientEndColor">#A800050B</Color>
+                    <Color x:Key="HeroGradientStartColor">#FF1D3B5A</Color>
+                    <Color x:Key="HeroGradientEndColor">#FF010711</Color>
+                    <Color x:Key="ResistanceGoodColor">#FF20D0A2</Color>
+                    <Color x:Key="ResistanceBadColor">#FFFF816F</Color>
+                    <SolidColorBrush x:Key="WorkbenchBackgroundBrush" Color="#00000000" />
+                    <SolidColorBrush x:Key="GlassPanelBrush" Color="#65101B2B" />
+                    <SolidColorBrush x:Key="GlassPanelStrongBrush" Color="#821C2E43" />
+                    <SolidColorBrush x:Key="GlassPanelSubtleBrush" Color="#331B314A" />
+                    <SolidColorBrush x:Key="GlassPanelStrokeBrush" Color="#42FFFFFF" />
+                    <SolidColorBrush x:Key="SubtlePanelStrokeBrush" Color="#22FFFFFF" />
+                    <SolidColorBrush x:Key="PinConnectedBrush" Color="#FF13A887" />
+                    <SolidColorBrush x:Key="PinDisconnectedBrush" Color="#FF4A4E59" />
+                    <SolidColorBrush x:Key="OnGlassPrimaryTextBrush" Color="#FFFFFFFF" />
+                    <SolidColorBrush x:Key="OnGlassSecondaryTextBrush" Color="#CCFFFFFF" />
+                </ResourceDictionary>
+
+                <ResourceDictionary x:Key="HighContrast">
+                    <SolidColorBrush x:Key="WorkbenchBackgroundBrush" Color="{ThemeResource SystemColorWindowColor}" />
+                    <SolidColorBrush x:Key="GlassPanelBrush" Color="{ThemeResource SystemColorWindowColor}" />
+                    <SolidColorBrush x:Key="GlassPanelStrongBrush" Color="{ThemeResource SystemColorButtonFaceColor}" />
+                    <SolidColorBrush x:Key="GlassPanelSubtleBrush" Color="{ThemeResource SystemColorWindowColor}" />
+                    <SolidColorBrush x:Key="GlassPanelStrokeBrush" Color="{ThemeResource SystemColorWindowTextColor}" />
+                    <SolidColorBrush x:Key="SubtlePanelStrokeBrush" Color="{ThemeResource SystemColorWindowTextColor}" />
+                    <SolidColorBrush x:Key="PinConnectedBrush" Color="{ThemeResource SystemColorHotlightColor}" />
+                    <SolidColorBrush x:Key="PinDisconnectedBrush" Color="{ThemeResource SystemColorButtonFaceColor}" />
+                    <SolidColorBrush x:Key="OnGlassPrimaryTextBrush" Color="{ThemeResource SystemColorWindowTextColor}" />
+                    <SolidColorBrush x:Key="OnGlassSecondaryTextBrush" Color="{ThemeResource SystemColorGrayTextColor}" />
+                    <Color x:Key="WorkbenchAccentColor">#FFFFFFFF</Color>
+                    <Color x:Key="ShellGradientStartColor">#FF000000</Color>
+                    <Color x:Key="ShellGradientEndColor">#FF000000</Color>
+                    <Color x:Key="HeroGradientStartColor">#FF000000</Color>
+                    <Color x:Key="HeroGradientEndColor">#FF000000</Color>
+                    <Color x:Key="ResistanceGoodColor">#FFFFFFFF</Color>
+                    <Color x:Key="ResistanceBadColor">#FFFFFFFF</Color>
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

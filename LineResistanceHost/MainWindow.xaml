@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Window
+    x:Class="LineResistanceHost.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Line Resistance Host"
+    mc:Ignorable="d">
+    <Window.SystemBackdrop>
+        <DesktopAcrylicBackdrop />
+    </Window.SystemBackdrop>
+
+    <Grid x:Name="WindowShell" Background="{ThemeResource WorkbenchBackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid IsHitTestVisible="False">
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="{ThemeResource ShellGradientStartColor}" Offset="0" />
+                    <GradientStop Color="{ThemeResource ShellGradientEndColor}" Offset="1" />
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Image Source="Assets/acrylic-noise.png" Stretch="Fill" Opacity="0.18" />
+        </Grid>
+
+        <Grid x:Name="AppTitleBar" Padding="12,0,150,0" Background="Transparent">
+            <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                <Image Source="Assets/AppIcon.ico" Width="16" Height="16" Opacity="0.78" />
+                <TextBlock
+                    x:Name="ConnectionTitleText"
+                    Text="未连接"
+                    FontSize="12"
+                    Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                    VerticalAlignment="Center" />
+            </StackPanel>
+        </Grid>
+
+        <Frame x:Name="RootFrame" Grid.Row="1" />
+    </Grid>
+</Window>

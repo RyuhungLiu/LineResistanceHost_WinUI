@@ -1,0 +1,30 @@
+# Build outputs
+bin/
+obj/
+artifacts/
+
+# User and IDE files
+.vs/
+.vscode/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Logs and local runtime state
+logs/
+*.log
+
+# Generated packages
+*.zip
+*.msix
+*.msixbundle
+*.appx
+*.appxbundle
+
+# Root-level design/debug screenshots generated during development
+/*.png
+
+# OS metadata
+Thumbs.db
+Desktop.ini

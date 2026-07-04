@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <EnableSourceControlManagerQueries>false</EnableSourceControlManagerQueries>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\LineResistanceHost\Models\Oa1DeviceInfo.cs" Link="Models\Oa1DeviceInfo.cs" />
+    <Compile Include="..\LineResistanceHost\Models\Oa1Frame.cs" Link="Models\Oa1Frame.cs" />
+    <Compile Include="..\LineResistanceHost\Services\AppText.cs" Link="Services\AppText.cs" />
+    <Compile Include="..\LineResistanceHost\Services\Oa1HidService.cs" Link="Services\Oa1HidService.cs" />
+  </ItemGroup>
+
+</Project>
