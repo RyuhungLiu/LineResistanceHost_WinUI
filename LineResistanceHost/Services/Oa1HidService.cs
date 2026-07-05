@@ -20,7 +20,9 @@ public sealed class Oa1HidService : IDisposable
     private const uint FileShareRead = 0x00000001;
     private const uint FileShareWrite = 0x00000002;
     private const uint OpenExisting = 3;
+    private const uint FileFlagOverlapped = 0x40000000;
     private const int HidpStatusSuccess = 0x00110000;
+    private const int ErrorIoPending = 997;
 
     private static readonly byte[] ActivationPayload = [0xAF, 0x03, 0x01, 0x01, 0x4C, 0xFF];
 
@@ -104,7 +106,7 @@ public sealed class Oa1HidService : IDisposable
         SafeFileHandle handle;
         try
         {
-            handle = OpenForConnection(device.Path);
+            handle = OpenForConnection(device);
         }
         catch (Exception ex)
         {
@@ -181,6 +183,11 @@ public sealed class Oa1HidService : IDisposable
         }
 
         readCancellation?.Cancel();
+        if (handle is { IsInvalid: false, IsClosed: false })
+        {
+            _ = CancelIoEx(handle, IntPtr.Zero);
+        }
+
         readCancellation?.Dispose();
         handle?.Dispose();
     }
@@ -198,14 +205,13 @@ public sealed class Oa1HidService : IDisposable
         {
             Array.Clear(buffer);
 
-            if (!ReadFile(handle, buffer, (uint)buffer.Length, out var read, IntPtr.Zero))
+            if (!TryReadInputReport(handle, buffer, token, out var read, out var errorMessage))
             {
                 if (!token.IsCancellationRequested)
                 {
-                    var message = new Win32Exception(Marshal.GetLastWin32Error()).Message;
                     if (DisconnectCurrentHandle(handle))
                     {
-                        Log(AppText.Format("ReadInterruptedLog", message));
+                        Log(AppText.Format("ReadInterruptedLog", errorMessage ?? AppText.Get("ReadInterruptedMessage")));
                         Disconnected?.Invoke(this, EventArgs.Empty);
                     }
                 }
@@ -314,18 +320,25 @@ public sealed class Oa1HidService : IDisposable
         }
     }
 
-    private static SafeFileHandle OpenForConnection(string path)
+    private static SafeFileHandle OpenForConnection(Oa1DeviceInfo device)
     {
-        var attempts = new (uint Access, uint ShareMode, string Name)[]
-        {
-            (GenericRead | GenericWrite, 0, AppText.Get("ExclusiveReadWrite")),
-            (GenericRead, 0, AppText.Get("ExclusiveRead"))
-        };
+        (uint Access, uint ShareMode, string Name)[] attempts = device.Kind == Oa1DeviceKind.WitrnK2
+            ? [
+                (GenericRead, FileShareRead | FileShareWrite, AppText.Get("SharedRead")),
+                (GenericRead | GenericWrite, FileShareRead | FileShareWrite, AppText.Get("SharedReadWrite")),
+                (GenericRead, 0, AppText.Get("ExclusiveRead"))
+            ]
+            : [
+                (GenericRead | GenericWrite, 0, AppText.Get("ExclusiveReadWrite")),
+                (GenericRead, 0, AppText.Get("ExclusiveRead")),
+                (GenericRead | GenericWrite, FileShareRead | FileShareWrite, AppText.Get("SharedReadWrite")),
+                (GenericRead, FileShareRead | FileShareWrite, AppText.Get("SharedRead"))
+            ];
 
         var errors = new List<string>();
         foreach (var (access, shareMode, name) in attempts)
         {
-            var handle = OpenDevice(path, access, shareMode);
+            var handle = OpenDevice(device.Path, access, shareMode, FileFlagOverlapped);
             if (!handle.IsInvalid)
             {
                 return handle;
@@ -516,6 +529,11 @@ public sealed class Oa1HidService : IDisposable
 
         readCancellation?.Cancel();
         readCancellation?.Dispose();
+        if (currentHandle is { IsInvalid: false, IsClosed: false })
+        {
+            _ = CancelIoEx(currentHandle, IntPtr.Zero);
+        }
+
         currentHandle?.Dispose();
         return true;
     }
@@ -558,7 +576,7 @@ public sealed class Oa1HidService : IDisposable
                 failures.Add($"SetOutputReport/{report.Length}: {new Win32Exception(Marshal.GetLastWin32Error()).Message}");
             }
 
-            if (WriteFile(handle, report, (uint)report.Length, out var written, IntPtr.Zero))
+            if (TryWriteReport(handle, report, out var written, out var writeError))
             {
                 method = string.IsNullOrWhiteSpace(setOutputMethod)
                     ? $"WriteFile ({written} bytes)"
@@ -566,7 +584,7 @@ public sealed class Oa1HidService : IDisposable
                 return true;
             }
 
-            failures.Add($"WriteFile/{report.Length}: {new Win32Exception(Marshal.GetLastWin32Error()).Message}");
+            failures.Add($"WriteFile/{report.Length}: {writeError}");
         }
 
         if (!string.IsNullOrWhiteSpace(fallbackSetOutputMethod))
@@ -597,14 +615,136 @@ public sealed class Oa1HidService : IDisposable
         yield return payloadAtZero;
     }
 
+    private static unsafe bool TryReadInputReport(
+        SafeFileHandle handle,
+        byte[] buffer,
+        CancellationToken token,
+        out uint bytesRead,
+        out string? errorMessage)
+    {
+        return TryOverlappedIo(
+            handle,
+            buffer,
+            (SafeFileHandle file, IntPtr pinnedBuffer, uint length, NativeOverlapped* overlapped, out uint transferred) =>
+                ReadFile(file, pinnedBuffer, length, out transferred, overlapped),
+            token,
+            Timeout.InfiniteTimeSpan,
+            out bytesRead,
+            out errorMessage);
+    }
+
+    private static unsafe bool TryWriteReport(
+        SafeFileHandle handle,
+        byte[] report,
+        out uint bytesWritten,
+        out string? errorMessage)
+    {
+        return TryOverlappedIo(
+            handle,
+            report,
+            (SafeFileHandle file, IntPtr pinnedBuffer, uint length, NativeOverlapped* overlapped, out uint transferred) =>
+                WriteFile(file, pinnedBuffer, length, out transferred, overlapped),
+            CancellationToken.None,
+            TimeSpan.FromMilliseconds(250),
+            out bytesWritten,
+            out errorMessage);
+    }
+
+    private static unsafe bool TryOverlappedIo(
+        SafeFileHandle handle,
+        byte[] buffer,
+        OverlappedIoOperation operation,
+        CancellationToken token,
+        TimeSpan timeout,
+        out uint transferred,
+        out string? errorMessage)
+    {
+        transferred = 0;
+        errorMessage = null;
+        if (handle.IsInvalid || handle.IsClosed)
+        {
+            errorMessage = AppText.Get("InvalidHandle");
+            return false;
+        }
+
+        using var completed = new ManualResetEvent(false);
+        var nativeOverlapped = new NativeOverlapped
+        {
+            EventHandle = completed.SafeWaitHandle.DangerousGetHandle()
+        };
+        var pinnedBuffer = GCHandle.Alloc(buffer, GCHandleType.Pinned);
+
+        try
+        {
+            var overlappedPointer = &nativeOverlapped;
+            if (operation(handle, pinnedBuffer.AddrOfPinnedObject(), (uint)buffer.Length, overlappedPointer, out transferred))
+            {
+                return true;
+            }
+
+            var error = Marshal.GetLastWin32Error();
+            if (error != ErrorIoPending)
+            {
+                errorMessage = new Win32Exception(error).Message;
+                return false;
+            }
+
+            var completedIndex = timeout == Timeout.InfiniteTimeSpan
+                ? WaitHandle.WaitAny([completed, token.WaitHandle])
+                : WaitHandle.WaitAny([completed, token.WaitHandle], timeout);
+
+            if (completedIndex != 0)
+            {
+                _ = CancelIoEx(handle, overlappedPointer);
+                try
+                {
+                    _ = GetOverlappedResult(handle, overlappedPointer, out _, true);
+                }
+                catch (ObjectDisposedException)
+                {
+                    // Closing the HID handle is also a valid cancellation path.
+                }
+
+                errorMessage = completedIndex == WaitHandle.WaitTimeout
+                    ? AppText.Get("IoTimeout")
+                    : new OperationCanceledException().Message;
+                return false;
+            }
+
+            if (GetOverlappedResult(handle, overlappedPointer, out transferred, false))
+            {
+                return true;
+            }
+
+            errorMessage = new Win32Exception(Marshal.GetLastWin32Error()).Message;
+            return false;
+        }
+        finally
+        {
+            pinnedBuffer.Free();
+        }
+    }
+
+    private unsafe delegate bool OverlappedIoOperation(
+        SafeFileHandle handle,
+        IntPtr buffer,
+        uint length,
+        NativeOverlapped* overlapped,
+        out uint transferred);
+
     private static SafeFileHandle OpenDevice(string path, uint desiredAccess)
     {
-        return CreateFile(path, desiredAccess, FileShareRead | FileShareWrite, IntPtr.Zero, OpenExisting, 0, IntPtr.Zero);
+        return CreateFile(path, desiredAccess, FileShareRead | FileShareWrite, IntPtr.Zero, OpenExisting, FileFlagOverlapped, IntPtr.Zero);
     }
 
     private static SafeFileHandle OpenDevice(string path, uint desiredAccess, uint shareMode)
     {
-        return CreateFile(path, desiredAccess, shareMode, IntPtr.Zero, OpenExisting, 0, IntPtr.Zero);
+        return OpenDevice(path, desiredAccess, shareMode, FileFlagOverlapped);
+    }
+
+    private static SafeFileHandle OpenDevice(string path, uint desiredAccess, uint shareMode, uint flagsAndAttributes)
+    {
+        return CreateFile(path, desiredAccess, shareMode, IntPtr.Zero, OpenExisting, flagsAndAttributes, IntPtr.Zero);
     }
 
     private static bool TryGetDeviceKind(ushort vendorId, ushort productId, out Oa1DeviceKind kind)
@@ -667,10 +807,19 @@ public sealed class Oa1HidService : IDisposable
     private static extern SafeFileHandle CreateFile(string fileName, uint desiredAccess, uint shareMode, IntPtr securityAttributes, uint creationDisposition, uint flagsAndAttributes, IntPtr templateFile);
 
     [DllImport("kernel32.dll", SetLastError = true)]
-    private static extern bool ReadFile(SafeFileHandle file, byte[] buffer, uint numberOfBytesToRead, out uint numberOfBytesRead, IntPtr overlapped);
+    private static extern unsafe bool ReadFile(SafeFileHandle file, IntPtr buffer, uint numberOfBytesToRead, out uint numberOfBytesRead, NativeOverlapped* overlapped);
 
     [DllImport("kernel32.dll", SetLastError = true)]
-    private static extern bool WriteFile(SafeFileHandle file, byte[] buffer, uint numberOfBytesToWrite, out uint numberOfBytesWritten, IntPtr overlapped);
+    private static extern unsafe bool WriteFile(SafeFileHandle file, IntPtr buffer, uint numberOfBytesToWrite, out uint numberOfBytesWritten, NativeOverlapped* overlapped);
+
+    [DllImport("kernel32.dll", SetLastError = true)]
+    private static extern unsafe bool CancelIoEx(SafeFileHandle file, NativeOverlapped* overlapped);
+
+    [DllImport("kernel32.dll", SetLastError = true)]
+    private static extern bool CancelIoEx(SafeFileHandle file, IntPtr overlapped);
+
+    [DllImport("kernel32.dll", SetLastError = true)]
+    private static extern unsafe bool GetOverlappedResult(SafeFileHandle file, NativeOverlapped* overlapped, out uint numberOfBytesTransferred, bool wait);
 
     [StructLayout(LayoutKind.Sequential)]
     private struct SP_DEVICE_INTERFACE_DATA

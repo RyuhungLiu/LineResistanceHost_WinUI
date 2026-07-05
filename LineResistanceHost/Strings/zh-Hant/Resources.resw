@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AppTitleDisconnected" xml:space="preserve">
+    <value>未連接</value>
+  </data>
+  <data name="AppTitleOa1Connected" xml:space="preserve">
+    <value>ATK-OA1已連接</value>
+  </data>
+  <data name="AppTitleK2Connected" xml:space="preserve">
+    <value>WITRN K2已連接</value>
+  </data>
+  <data name="WindowTitle" xml:space="preserve">
+    <value>Line Resistance Host</value>
+  </data>
+  <data name="BusResistance" xml:space="preserve">
+    <value>總線阻</value>
+  </data>
+  <data name="CableLength" xml:space="preserve">
+    <value>線材長度</value>
+  </data>
+  <data name="CableSection" xml:space="preserve">
+    <value>線材</value>
+  </data>
+  <data name="CableType" xml:space="preserve">
+    <value>類型</value>
+  </data>
+  <data name="PinContinuity" xml:space="preserve">
+    <value>引腳通斷</value>
+  </data>
+  <data name="RawFrame" xml:space="preserve">
+    <value>原始幀</value>
+  </data>
+  <data name="DeviceCapture" xml:space="preserve">
+    <value>設備與擷取</value>
+  </data>
+  <data name="TargetHidDevice" xml:space="preserve">
+    <value>目標 HID 設備</value>
+  </data>
+  <data name="NoDeviceFound" xml:space="preserve">
+    <value>未發現設備</value>
+  </data>
+  <data name="Preempt" xml:space="preserve">
+    <value>搶占</value>
+  </data>
+  <data name="FrameCount" xml:space="preserve">
+    <value>幀數</value>
+  </data>
+  <data name="Checksum" xml:space="preserve">
+    <value>校驗</value>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>重新整理</value>
+  </data>
+  <data name="Connect" xml:space="preserve">
+    <value>連接</value>
+  </data>
+  <data name="Activate" xml:space="preserve">
+    <value>激活</value>
+  </data>
+  <data name="Disconnect" xml:space="preserve">
+    <value>斷開</value>
+  </data>
+  <data name="SampleFrame" xml:space="preserve">
+    <value>模擬幀</value>
+  </data>
+  <data name="Appearance" xml:space="preserve">
+    <value>外觀</value>
+  </data>
+  <data name="BackdropMaterial" xml:space="preserve">
+    <value>背景材質</value>
+  </data>
+  <data name="DarkMode" xml:space="preserve">
+    <value>深色模式</value>
+  </data>
+  <data name="Off" xml:space="preserve">
+    <value>關</value>
+  </data>
+  <data name="On" xml:space="preserve">
+    <value>開</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>語言</value>
+  </data>
+  <data name="Waiting" xml:space="preserve">
+    <value>等待</value>
+  </data>
+  <data name="WaitingData" xml:space="preserve">
+    <value>等待資料</value>
+  </data>
+  <data name="Correct" xml:space="preserve">
+    <value>正確</value>
+  </data>
+  <data name="Wrong" xml:space="preserve">
+    <value>錯誤</value>
+  </data>
+  <data name="Connected" xml:space="preserve">
+    <value>已連接</value>
+  </data>
+  <data name="Disconnected" xml:space="preserve">
+    <value>未連接</value>
+  </data>
+  <data name="PinConnected" xml:space="preserve">
+    <value>通</value>
+  </data>
+  <data name="PinDisconnected" xml:space="preserve">
+    <value>斷</value>
+  </data>
+  <data name="AppStarted" xml:space="preserve">
+    <value>本地上位機已啟動，目標 VID_36B7 / VID_0716 PID_5060。</value>
+  </data>
+  <data name="DisconnectedMessage" xml:space="preserve">
+    <value>已斷開連接。</value>
+  </data>
+  <data name="ActivationSentTitle" xml:space="preserve">
+    <value>激活命令已發送</value>
+  </data>
+  <data name="ActivationSentMessage" xml:space="preserve">
+    <value>設備已切換到持續輸出模式。</value>
+  </data>
+  <data name="ActivationFailedTitle" xml:space="preserve">
+    <value>激活失敗</value>
+  </data>
+  <data name="HoldOn" xml:space="preserve">
+    <value>Hold 已開啟，暫停刷新幀顯示。</value>
+  </data>
+  <data name="HoldOff" xml:space="preserve">
+    <value>Hold 已關閉，恢復即時刷新。</value>
+  </data>
+  <data name="SampleLoaded" xml:space="preserve">
+    <value>已載入模擬幀。</value>
+  </data>
+  <data name="DeviceConnectedMessage" xml:space="preserve">
+    <value>已連接 {0}</value>
+  </data>
+  <data name="AutoConnectFailed" xml:space="preserve">
+    <value>自動連接 {0} 失敗：{1}</value>
+  </data>
+  <data name="AutoAttempt" xml:space="preserve">
+    <value>自動搶占發現 {0}，準備連接。</value>
+  </data>
+  <data name="NoDeviceTitle" xml:space="preserve">
+    <value>未發現設備</value>
+  </data>
+  <data name="DevicesRefreshedTitle" xml:space="preserve">
+    <value>已重新整理設備</value>
+  </data>
+  <data name="InsertDeviceMessage" xml:space="preserve">
+    <value>請插入 ATK-OA1 或 WITRN K2。</value>
+  </data>
+  <data name="DeviceCountMessage" xml:space="preserve">
+    <value>發現 {0} 個目標設備。</value>
+  </data>
+  <data name="ReadInterruptedMessage" xml:space="preserve">
+    <value>設備讀取中斷或已拔出。</value>
+  </data>
+  <data name="DeviceConnectedTitle" xml:space="preserve">
+    <value>設備已連接</value>
+  </data>
+  <data name="DeviceDisconnectedTitle" xml:space="preserve">
+    <value>設備未連接</value>
+  </data>
+  <data name="PrimeActivationSent" xml:space="preserve">
+    <value>已發送搶占激活，等待設備重新枚舉為資料介面。</value>
+  </data>
+  <data name="OpenHidFailed" xml:space="preserve">
+    <value>無法打開 HID 設備</value>
+  </data>
+  <data name="ConnectedLog" xml:space="preserve">
+    <value>已連接 {0} {1}</value>
+  </data>
+  <data name="ConnectPreActivation" xml:space="preserve">
+    <value>連接預激活</value>
+  </data>
+  <data name="K2NoActivation" xml:space="preserve">
+    <value>WITRN K2 無需激活，開始讀取 Metrics Report。</value>
+  </data>
+  <data name="DeviceNotConnected" xml:space="preserve">
+    <value>設備未連接</value>
+  </data>
+  <data name="ActivationNotRequired" xml:space="preserve">
+    <value>目前設備無需激活</value>
+  </data>
+  <data name="ReadInterruptedLog" xml:space="preserve">
+    <value>讀取中斷：{0}</value>
+  </data>
+  <data name="FrameReceivedLog" xml:space="preserve">
+    <value>收到資料幀 #{0}: {1}</value>
+  </data>
+  <data name="ReportLengthLog" xml:space="preserve">
+    <value>HID 報告長度 Input={0}, Output={1}, Feature={2}</value>
+  </data>
+  <data name="CapsFailedLog" xml:space="preserve">
+    <value>HidP_GetCaps 失敗，status=0x{0:X8}</value>
+  </data>
+  <data name="ExclusiveReadWrite" xml:space="preserve">
+    <value>獨占讀寫</value>
+  </data>
+  <data name="ExclusiveRead" xml:space="preserve">
+    <value>獨占只讀</value>
+  </data>
+  <data name="SharedReadWrite" xml:space="preserve">
+    <value>共享讀寫</value>
+  </data>
+  <data name="SharedRead" xml:space="preserve">
+    <value>共享只讀</value>
+  </data>
+  <data name="OpenHidFailedWithDetails" xml:space="preserve">
+    <value>無法打開 HID 設備：{0}</value>
+  </data>
+  <data name="PrimeActivationWriteOnly" xml:space="preserve">
+    <value>已發送搶占激活 {0} (只寫句柄)</value>
+  </data>
+  <data name="PrimeActivationFailed" xml:space="preserve">
+    <value>只寫搶占失敗：{0}</value>
+  </data>
+  <data name="ActivationSendFailedKeep" xml:space="preserve">
+    <value>激活命令發送失敗，保持連接等待資料：{0}</value>
+  </data>
+  <data name="SourceSent" xml:space="preserve">
+    <value>{0}已發送 {1}</value>
+  </data>
+  <data name="SourceFailedKeep" xml:space="preserve">
+    <value>{0}失敗，繼續保持連接：{1}</value>
+  </data>
+  <data name="ActivationSentLog" xml:space="preserve">
+    <value>已發送激活命令 {0}</value>
+  </data>
+  <data name="ActivationSentHelper" xml:space="preserve">
+    <value>已發送激活命令 {0} (輔助寫句柄)</value>
+  </data>
+  <data name="HelperWriteHandle" xml:space="preserve">
+    <value>輔助寫句柄: {0}</value>
+  </data>
+  <data name="ActivationSendFailed" xml:space="preserve">
+    <value>激活命令發送失敗：{0}</value>
+  </data>
+  <data name="InvalidHandle" xml:space="preserve">
+    <value>句柄無效</value>
+  </data>
+  <data name="IoTimeout" xml:space="preserve">
+    <value>I/O 操作逾時</value>
+  </data>
+  <data name="K2EstimateNote" xml:space="preserve">
+    <value>經驗估算，非 K2 HID 直接上報的原始分離值</value>
+  </data>
+  <data name="K2EstimateLowConfidence" xml:space="preserve">
+    <value>外推，可信度下降</value>
+  </data>
+</root>
+

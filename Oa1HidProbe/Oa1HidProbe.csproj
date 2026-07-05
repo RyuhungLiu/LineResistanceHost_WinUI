@@ -2,9 +2,10 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net10.0</TargetFramework>
+    <TargetFramework>net10.0-windows10.0.26100.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <EnableSourceControlManagerQueries>false</EnableSourceControlManagerQueries>
   </PropertyGroup>
 
@@ -13,6 +14,11 @@
     <Compile Include="..\LineResistanceHost\Models\Oa1Frame.cs" Link="Models\Oa1Frame.cs" />
     <Compile Include="..\LineResistanceHost\Services\AppText.cs" Link="Services\AppText.cs" />
     <Compile Include="..\LineResistanceHost\Services\Oa1HidService.cs" Link="Services\Oa1HidService.cs" />
+    <PRIResource Include="..\LineResistanceHost\Strings\**\*.resw" Link="Strings\%(RecursiveDir)%(Filename)%(Extension)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="2.2.0" />
   </ItemGroup>
 
 </Project>

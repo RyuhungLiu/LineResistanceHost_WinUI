@@ -22,6 +22,7 @@ public sealed partial class MainPage : Page
     private string? _lastAutoAttemptPath;
     private Oa1Frame _currentFrame = Oa1Frame.Empty;
     private bool _applyingLocalization;
+    private bool _isDisposed;
 
     public MainPage()
     {
@@ -31,6 +32,7 @@ public sealed partial class MainPage : Page
         _hidService.LogReceived += HidService_LogReceived;
         _hidService.Disconnected += HidService_Disconnected;
         AppText.LanguageChanged += AppText_LanguageChanged;
+        Unloaded += MainPage_Unloaded;
 
         _autoConnectTimer.Interval = TimeSpan.FromMilliseconds(50);
         _autoConnectTimer.Tick += AutoConnectTimer_Tick;
@@ -41,6 +43,29 @@ public sealed partial class MainPage : Page
         UpdateThreshold();
         RefreshDevices(false);
         AddLog(AppText.Get("AppStarted"));
+    }
+
+    private void MainPage_Unloaded(object sender, RoutedEventArgs e)
+    {
+        DisposePageResources();
+    }
+
+    private void DisposePageResources()
+    {
+        if (_isDisposed)
+        {
+            return;
+        }
+
+        _isDisposed = true;
+        _autoConnectTimer.Stop();
+        _autoConnectTimer.Tick -= AutoConnectTimer_Tick;
+        _hidService.FrameReceived -= HidService_FrameReceived;
+        _hidService.LogReceived -= HidService_LogReceived;
+        _hidService.Disconnected -= HidService_Disconnected;
+        AppText.LanguageChanged -= AppText_LanguageChanged;
+        Unloaded -= MainPage_Unloaded;
+        _hidService.Dispose();
     }
 
     private void RefreshButton_Click(object sender, RoutedEventArgs e)

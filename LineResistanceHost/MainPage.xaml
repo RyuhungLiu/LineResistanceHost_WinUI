@@ -53,10 +53,10 @@
     </Page.Resources>
 
     <Grid x:Name="RootLayout" Background="Transparent">
-        <InfoBar
-            x:Name="StatusBar"
-            IsOpen="False"
-            Visibility="Collapsed" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
 
         <ListView
             x:Name="LogList"
@@ -124,7 +124,7 @@
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <TextBlock x:Name="CableLengthLabelText" Text="线材长度" Style="{StaticResource MetricLabelStyle}" VerticalAlignment="Center" />
-                        <Slider x:Name="LengthSlider" Grid.Column="1" Minimum="0.3" Maximum="3" StepFrequency="0.1" Value="1" ValueChanged="LengthSlider_ValueChanged" />
+                        <Slider x:Name="LengthSlider" Grid.Column="1" Minimum="0.3" Maximum="3" StepFrequency="0.1" Value="1" ValueChanged="LengthSlider_ValueChanged" AutomationProperties.AutomationId="LengthSlider" />
                         <TextBlock x:Name="LengthText" Grid.Column="2" Text="1.0 m" FontWeight="SemiBold" MinWidth="52" TextAlignment="Right" VerticalAlignment="Center" />
                         <TextBlock x:Name="ThresholdText" Visibility="Collapsed" />
                     </Grid>
@@ -193,7 +193,7 @@
                             <FontIcon Glyph="&#xE8FD;" FontFamily="{ThemeResource SymbolThemeFontFamily}" FontSize="14" />
                             <TextBlock x:Name="RawFrameTitleText" Text="原始帧" Style="{StaticResource SectionTitleStyle}" />
                         </StackPanel>
-                        <TextBox x:Name="RawFrameText" Grid.Column="1" Text="-" FontFamily="Consolas" IsReadOnly="True" TextWrapping="NoWrap" />
+                        <TextBox x:Name="RawFrameText" Grid.Column="1" Text="-" FontFamily="Consolas" IsReadOnly="True" TextWrapping="NoWrap" AutomationProperties.AutomationId="RawFrameText" />
                     </Grid>
                 </Border>
 
@@ -218,11 +218,13 @@
                                 Header="目标 HID 设备"
                                 PlaceholderText="未发现设备"
                                 DisplayMemberPath="DisplayName"
+                                AutomationProperties.AutomationId="DeviceComboBox"
                                 HorizontalAlignment="Stretch" />
                             <ToggleSwitch
                                 x:Name="AutoConnectSwitch"
                                 Grid.Column="1"
                                 Header="抢占"
+                                AutomationProperties.AutomationId="AutoConnectSwitch"
                                 IsOn="True" />
                             <StackPanel Grid.Column="2" Spacing="3" VerticalAlignment="Bottom">
                                 <TextBlock x:Name="FrameCountLabelText" Text="帧数" Style="{StaticResource MetricLabelStyle}" />
@@ -245,7 +247,7 @@
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
 
-                            <Button x:Name="RefreshButton" Style="{StaticResource CommandButtonStyle}" Click="RefreshButton_Click">
+                            <Button x:Name="RefreshButton" Style="{StaticResource CommandButtonStyle}" AutomationProperties.AutomationId="RefreshButton" Click="RefreshButton_Click">
                                 <StackPanel Orientation="Horizontal" Spacing="6">
                                     <FontIcon Glyph="&#xE72C;" FontFamily="{ThemeResource SymbolThemeFontFamily}" FontSize="14" />
                                     <TextBlock x:Name="RefreshButtonText" Text="刷新" />
@@ -257,6 +259,7 @@
                                 MinHeight="34"
                                 HorizontalAlignment="Stretch"
                                 HorizontalContentAlignment="Center"
+                                AutomationProperties.AutomationId="ConnectButton"
                                 Style="{ThemeResource AccentButtonStyle}"
                                 Click="ConnectButton_Click">
                                 <StackPanel Orientation="Horizontal" Spacing="6">
@@ -264,25 +267,25 @@
                                     <TextBlock x:Name="ConnectButtonText" Text="连接" />
                                 </StackPanel>
                             </Button>
-                            <Button x:Name="ActivateButton" Grid.Column="2" Style="{StaticResource CommandButtonStyle}" Click="ActivateButton_Click">
+                            <Button x:Name="ActivateButton" Grid.Column="2" Style="{StaticResource CommandButtonStyle}" AutomationProperties.AutomationId="ActivateButton" Click="ActivateButton_Click">
                                 <StackPanel Orientation="Horizontal" Spacing="6">
                                     <FontIcon Glyph="&#xE945;" FontFamily="{ThemeResource SymbolThemeFontFamily}" FontSize="14" />
                                     <TextBlock x:Name="ActivateButtonText" Text="激活" />
                                 </StackPanel>
                             </Button>
-                            <Button x:Name="DisconnectButton" Grid.Row="1" Style="{StaticResource CommandButtonStyle}" Click="DisconnectButton_Click">
+                            <Button x:Name="DisconnectButton" Grid.Row="1" Style="{StaticResource CommandButtonStyle}" AutomationProperties.AutomationId="DisconnectButton" Click="DisconnectButton_Click">
                                 <StackPanel Orientation="Horizontal" Spacing="6">
                                     <FontIcon Glyph="&#xE711;" FontFamily="{ThemeResource SymbolThemeFontFamily}" FontSize="14" />
                                     <TextBlock x:Name="DisconnectButtonText" Text="断开" />
                                 </StackPanel>
                             </Button>
-                            <ToggleButton x:Name="HoldButton" Grid.Row="1" Grid.Column="1" MinHeight="34" HorizontalAlignment="Stretch" Checked="HoldButton_Toggled" Unchecked="HoldButton_Toggled">
+                            <ToggleButton x:Name="HoldButton" Grid.Row="1" Grid.Column="1" MinHeight="34" HorizontalAlignment="Stretch" AutomationProperties.AutomationId="HoldButton" Checked="HoldButton_Toggled" Unchecked="HoldButton_Toggled">
                                 <StackPanel Orientation="Horizontal" Spacing="6">
                                     <FontIcon Glyph="&#xE769;" FontFamily="{ThemeResource SymbolThemeFontFamily}" FontSize="14" />
                                     <TextBlock Text="Hold" />
                                 </StackPanel>
                             </ToggleButton>
-                            <Button Grid.Row="1" Grid.Column="2" MinHeight="34" HorizontalAlignment="Stretch" Click="SampleButton_Click">
+                            <Button x:Name="SampleButton" Grid.Row="1" Grid.Column="2" MinHeight="34" HorizontalAlignment="Stretch" AutomationProperties.AutomationId="SampleButton" Click="SampleButton_Click">
                                 <StackPanel Orientation="Horizontal" Spacing="6">
                                     <FontIcon Glyph="&#xE7C3;" FontFamily="{ThemeResource SymbolThemeFontFamily}" FontSize="14" />
                                     <TextBlock x:Name="SampleFrameButtonText" Text="模拟帧" />
@@ -312,6 +315,7 @@
                             Header="背景材质"
                             SelectedIndex="0"
                             SelectionChanged="BackdropComboBox_SelectionChanged"
+                            AutomationProperties.AutomationId="BackdropComboBox"
                             HorizontalAlignment="Stretch">
                             <ComboBoxItem Content="Desktop Acrylic" Tag="Acrylic" />
                             <ComboBoxItem Content="Mica" Tag="Mica" />
@@ -325,6 +329,7 @@
                             Header="深色模式"
                             OffContent="关"
                             OnContent="开"
+                            AutomationProperties.AutomationId="ThemeSwitch"
                             Toggled="ThemeSwitch_Toggled" />
                         <ComboBox
                             x:Name="LanguageComboBox"
@@ -332,6 +337,7 @@
                             Grid.ColumnSpan="2"
                             Header="语言"
                             SelectionChanged="LanguageComboBox_SelectionChanged"
+                            AutomationProperties.AutomationId="LanguageComboBox"
                             HorizontalAlignment="Stretch">
                             <ComboBoxItem Content="简体中文" Tag="SimplifiedChinese" />
                             <ComboBoxItem Content="繁體中文" Tag="TraditionalChinese" />
@@ -344,9 +350,17 @@
                     Content="WinUI Fork From https://oa1.ruaorz.com/"
                     NavigateUri="https://oa1.ruaorz.com/"
                     HorizontalAlignment="Center"
+                    AutomationProperties.AutomationId="ForkLink"
                     Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                     Padding="4,0,4,2" />
             </StackPanel>
         </ScrollViewer>
+
+        <InfoBar
+            x:Name="StatusBar"
+            Grid.Row="1"
+            Margin="14,0,14,12"
+            IsOpen="False"
+            AutomationProperties.AutomationId="StatusBar" />
     </Grid>
 </Page>

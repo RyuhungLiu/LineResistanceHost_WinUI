@@ -28,6 +28,7 @@ public sealed partial class MainWindow : Window
     {
         InitializeComponent();
         AppText.LanguageChanged += AppText_LanguageChanged;
+        Closed += MainWindow_Closed;
 
         ExtendsContentIntoTitleBar = true;
         SetTitleBar(AppTitleBar);
@@ -57,6 +58,12 @@ public sealed partial class MainWindow : Window
     private void AppText_LanguageChanged(object? sender, EventArgs e)
     {
         SetConnectionTitle(_connectionKind);
+    }
+
+    private void MainWindow_Closed(object sender, WindowEventArgs args)
+    {
+        AppText.LanguageChanged -= AppText_LanguageChanged;
+        Closed -= MainWindow_Closed;
     }
 
     public void SetBackdropStyle(string style)

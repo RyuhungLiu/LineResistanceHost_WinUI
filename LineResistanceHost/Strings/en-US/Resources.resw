@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AppTitleDisconnected" xml:space="preserve">
+    <value>Disconnected</value>
+  </data>
+  <data name="AppTitleOa1Connected" xml:space="preserve">
+    <value>ATK-OA1 Connected</value>
+  </data>
+  <data name="AppTitleK2Connected" xml:space="preserve">
+    <value>WITRN K2 Connected</value>
+  </data>
+  <data name="WindowTitle" xml:space="preserve">
+    <value>Line Resistance Host</value>
+  </data>
+  <data name="BusResistance" xml:space="preserve">
+    <value>Bus R</value>
+  </data>
+  <data name="CableLength" xml:space="preserve">
+    <value>Cable length</value>
+  </data>
+  <data name="CableSection" xml:space="preserve">
+    <value>Cable</value>
+  </data>
+  <data name="CableType" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="PinContinuity" xml:space="preserve">
+    <value>Pin continuity</value>
+  </data>
+  <data name="RawFrame" xml:space="preserve">
+    <value>Raw frame</value>
+  </data>
+  <data name="DeviceCapture" xml:space="preserve">
+    <value>Device and capture</value>
+  </data>
+  <data name="TargetHidDevice" xml:space="preserve">
+    <value>Target HID device</value>
+  </data>
+  <data name="NoDeviceFound" xml:space="preserve">
+    <value>No device found</value>
+  </data>
+  <data name="Preempt" xml:space="preserve">
+    <value>Preempt</value>
+  </data>
+  <data name="FrameCount" xml:space="preserve">
+    <value>Frames</value>
+  </data>
+  <data name="Checksum" xml:space="preserve">
+    <value>Checksum</value>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="Connect" xml:space="preserve">
+    <value>Connect</value>
+  </data>
+  <data name="Activate" xml:space="preserve">
+    <value>Activate</value>
+  </data>
+  <data name="Disconnect" xml:space="preserve">
+    <value>Disconnect</value>
+  </data>
+  <data name="SampleFrame" xml:space="preserve">
+    <value>Sample frame</value>
+  </data>
+  <data name="Appearance" xml:space="preserve">
+    <value>Appearance</value>
+  </data>
+  <data name="BackdropMaterial" xml:space="preserve">
+    <value>Backdrop</value>
+  </data>
+  <data name="DarkMode" xml:space="preserve">
+    <value>Dark mode</value>
+  </data>
+  <data name="Off" xml:space="preserve">
+    <value>Off</value>
+  </data>
+  <data name="On" xml:space="preserve">
+    <value>On</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="Waiting" xml:space="preserve">
+    <value>Waiting</value>
+  </data>
+  <data name="WaitingData" xml:space="preserve">
+    <value>Waiting for data</value>
+  </data>
+  <data name="Correct" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Wrong" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="Connected" xml:space="preserve">
+    <value>Connected</value>
+  </data>
+  <data name="Disconnected" xml:space="preserve">
+    <value>Disconnected</value>
+  </data>
+  <data name="PinConnected" xml:space="preserve">
+    <value>Closed</value>
+  </data>
+  <data name="PinDisconnected" xml:space="preserve">
+    <value>Open</value>
+  </data>
+  <data name="AppStarted" xml:space="preserve">
+    <value>Local host started. Targets: VID_36B7 / VID_0716 PID_5060.</value>
+  </data>
+  <data name="DisconnectedMessage" xml:space="preserve">
+    <value>Disconnected.</value>
+  </data>
+  <data name="ActivationSentTitle" xml:space="preserve">
+    <value>Activation sent</value>
+  </data>
+  <data name="ActivationSentMessage" xml:space="preserve">
+    <value>Device switched to continuous output mode.</value>
+  </data>
+  <data name="ActivationFailedTitle" xml:space="preserve">
+    <value>Activation failed</value>
+  </data>
+  <data name="HoldOn" xml:space="preserve">
+    <value>Hold enabled. Frame display is paused.</value>
+  </data>
+  <data name="HoldOff" xml:space="preserve">
+    <value>Hold disabled. Live refresh resumed.</value>
+  </data>
+  <data name="SampleLoaded" xml:space="preserve">
+    <value>Sample frame loaded.</value>
+  </data>
+  <data name="DeviceConnectedMessage" xml:space="preserve">
+    <value>Connected {0}</value>
+  </data>
+  <data name="AutoConnectFailed" xml:space="preserve">
+    <value>Auto-connect to {0} failed: {1}</value>
+  </data>
+  <data name="AutoAttempt" xml:space="preserve">
+    <value>Auto-preempt found {0}; connecting.</value>
+  </data>
+  <data name="NoDeviceTitle" xml:space="preserve">
+    <value>No device found</value>
+  </data>
+  <data name="DevicesRefreshedTitle" xml:space="preserve">
+    <value>Devices refreshed</value>
+  </data>
+  <data name="InsertDeviceMessage" xml:space="preserve">
+    <value>Insert an ATK-OA1 or WITRN K2.</value>
+  </data>
+  <data name="DeviceCountMessage" xml:space="preserve">
+    <value>Found {0} target device(s).</value>
+  </data>
+  <data name="ReadInterruptedMessage" xml:space="preserve">
+    <value>Device read was interrupted or the device was removed.</value>
+  </data>
+  <data name="DeviceConnectedTitle" xml:space="preserve">
+    <value>Device connected</value>
+  </data>
+  <data name="DeviceDisconnectedTitle" xml:space="preserve">
+    <value>Device disconnected</value>
+  </data>
+  <data name="PrimeActivationSent" xml:space="preserve">
+    <value>Preempt activation sent. Waiting for the device to re-enumerate as a data interface.</value>
+  </data>
+  <data name="OpenHidFailed" xml:space="preserve">
+    <value>Unable to open HID device</value>
+  </data>
+  <data name="ConnectedLog" xml:space="preserve">
+    <value>Connected {0} {1}</value>
+  </data>
+  <data name="ConnectPreActivation" xml:space="preserve">
+    <value>Connect pre-activation</value>
+  </data>
+  <data name="K2NoActivation" xml:space="preserve">
+    <value>WITRN K2 does not require activation. Reading Metrics Report.</value>
+  </data>
+  <data name="DeviceNotConnected" xml:space="preserve">
+    <value>Device is not connected</value>
+  </data>
+  <data name="ActivationNotRequired" xml:space="preserve">
+    <value>The current device does not require activation</value>
+  </data>
+  <data name="ReadInterruptedLog" xml:space="preserve">
+    <value>Read interrupted: {0}</value>
+  </data>
+  <data name="FrameReceivedLog" xml:space="preserve">
+    <value>Received frame #{0}: {1}</value>
+  </data>
+  <data name="ReportLengthLog" xml:space="preserve">
+    <value>HID report length Input={0}, Output={1}, Feature={2}</value>
+  </data>
+  <data name="CapsFailedLog" xml:space="preserve">
+    <value>HidP_GetCaps failed, status=0x{0:X8}</value>
+  </data>
+  <data name="ExclusiveReadWrite" xml:space="preserve">
+    <value>exclusive read/write</value>
+  </data>
+  <data name="ExclusiveRead" xml:space="preserve">
+    <value>exclusive read</value>
+  </data>
+  <data name="SharedReadWrite" xml:space="preserve">
+    <value>shared read/write</value>
+  </data>
+  <data name="SharedRead" xml:space="preserve">
+    <value>shared read</value>
+  </data>
+  <data name="OpenHidFailedWithDetails" xml:space="preserve">
+    <value>Unable to open HID device: {0}</value>
+  </data>
+  <data name="PrimeActivationWriteOnly" xml:space="preserve">
+    <value>Preempt activation sent via {0} (write-only handle)</value>
+  </data>
+  <data name="PrimeActivationFailed" xml:space="preserve">
+    <value>Write-only preempt failed: {0}</value>
+  </data>
+  <data name="ActivationSendFailedKeep" xml:space="preserve">
+    <value>Activation command failed; keeping connection and waiting for data: {0}</value>
+  </data>
+  <data name="SourceSent" xml:space="preserve">
+    <value>{0} sent via {1}</value>
+  </data>
+  <data name="SourceFailedKeep" xml:space="preserve">
+    <value>{0} failed; keeping connection: {1}</value>
+  </data>
+  <data name="ActivationSentLog" xml:space="preserve">
+    <value>Activation command sent via {0}</value>
+  </data>
+  <data name="ActivationSentHelper" xml:space="preserve">
+    <value>Activation command sent via {0} (helper write handle)</value>
+  </data>
+  <data name="HelperWriteHandle" xml:space="preserve">
+    <value>helper write handle: {0}</value>
+  </data>
+  <data name="ActivationSendFailed" xml:space="preserve">
+    <value>Activation command failed: {0}</value>
+  </data>
+  <data name="InvalidHandle" xml:space="preserve">
+    <value>Invalid handle</value>
+  </data>
+  <data name="IoTimeout" xml:space="preserve">
+    <value>I/O operation timed out</value>
+  </data>
+  <data name="K2EstimateNote" xml:space="preserve">
+    <value>empirical estimate, not raw split values reported directly by K2 HID</value>
+  </data>
+  <data name="K2EstimateLowConfidence" xml:space="preserve">
+    <value>extrapolated; lower confidence</value>
+  </data>
+</root>
+
