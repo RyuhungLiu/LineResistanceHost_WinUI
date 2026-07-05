@@ -15,7 +15,7 @@ $rids = @(
     @{ Rid = "win-arm64"; Platform = "ARM64" }
 )
 
-$keepDirs = @("Assets", "Microsoft.UI.Xaml", "zh-CN", "zh-TW", "en-us")
+$keepDirs = @("Assets", "Microsoft.UI.Xaml", "zh-CN", "zh-TW", "zh-Hans", "zh-Hant", "en-us", "en-US")
 $removePatterns = @(
     "*.pdb",
     "Microsoft.Web.WebView2*.dll",
